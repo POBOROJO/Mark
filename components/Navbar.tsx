@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Link from "next/link";
 import { Button, buttonVariants } from "./ui/button";
@@ -13,6 +11,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+
+const currentDate = new Date().toLocaleDateString();
 
 const Navbar = () => {
   return (
@@ -51,14 +51,39 @@ const Navbar = () => {
           <SheetTrigger>
             <HamburgerMenuIcon className="size-7 md:hidden" />
           </SheetTrigger>
-          <SheetContent>
+          <SheetContent side="left" className="w-[300px]">
             <SheetHeader>
-              <SheetTitle>Are you absolutely sure?</SheetTitle>
-              <SheetDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </SheetDescription>
+              <SheetTitle> {`Hi there - ${currentDate}`}</SheetTitle>
             </SheetHeader>
+            <nav className="flex flex-col space-y-4 mt-4">
+              <Link href="/" className="text-lg">
+                Home
+              </Link>
+              <Link href="/about" className="text-lg">
+                About
+              </Link>
+              <Link href="/contact" className="text-lg">
+                Contact
+              </Link>
+              <Link
+                href="/login"
+                className={buttonVariants({
+                  variant: "outline",
+                  className: "w-full",
+                })}
+              >
+                Login
+              </Link>
+              <Link
+                href="/login"
+                className={buttonVariants({
+                  variant: "default",
+                  className: "w-full",
+                })}
+              >
+                Sign Up
+              </Link>
+            </nav>
           </SheetContent>
         </Sheet>
       </div>
