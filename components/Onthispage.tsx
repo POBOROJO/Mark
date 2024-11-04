@@ -1,50 +1,53 @@
-"use client"
+"use client";
 
-import { Link } from 'lucide-react';
-import React, {useEffect, useState} from 'react'
+import { cn } from "@/lib/utils";
+import { Link } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
-
-interface LinkType{
-    id: string;
-    text: string;
+interface LinkType {
+  id: string;
+  text: string;
 }
 
-const Onthispage = ({htmlContent}:{htmlContent: string}) => {
+const Onthispage = ({ htmlContent, className }: { htmlContent: string, className: string }) => {
+  const [links, setlinks] = useState<null | LinkType[]>(null);
 
- const [links, setlinks] = useState<null|LinkType[]>(null);
-
- useEffect(() => {
-    const temp = document.createElement('div');
+  useEffect(() => {
+    const temp = document.createElement("div");
     temp.innerHTML = htmlContent;
 
-    const headings = temp.querySelectorAll('h2, h3');
+    const headings = temp.querySelectorAll("h2, h3");
 
     const generatedLinks: LinkType[] = [];
 
     headings.forEach((heading, index) => {
-        const id = heading.id || `heading-${index}`;
-        heading.id = id;
+      const id = heading.id || `heading-${index}`;
+      heading.id = id;
 
-        generatedLinks.push({
-          id:id,
-          text: heading.innerHTML
-        })
+      generatedLinks.push({
+        id: id,
+        text: heading.innerHTML,
+      });
     });
 
     setlinks(generatedLinks);
-
-
- }, [htmlContent]);
- 
+  }, [htmlContent]);
 
   return (
-    <div className='hidden md:block'>
-      <div className='sticky'>
+    <div className={cn("hidden md:block", className)}>
+      <div className="sticky top-20">
         <h2>On this page</h2>
-        <ul>{links && links.map((link) => <li key={link.id}><Link href={`#${link.id}`}>{link.text}</Link></li>)}</ul> 
+        <ul className="not-prose">
+          {links &&
+            links.map((link) => (
+              <li key={link.id} className="pt-1">
+                <a className="hover:underline" href={`#${link.id}`}>{link.text}</a>
+              </li>
+            ))}
+        </ul>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Onthispage
+export default Onthispage;
