@@ -26,7 +26,7 @@ export default async function BlogPage({
     .use(rehypeAutolinkHeadings)
     .use(rehypeSlug)
     .use(rehypePrettyCode,{
-      theme:"material-theme-palenight",
+      theme:"github-dark",
       transformers: [
         transformerCopyButton({
           visibility: 'always',
@@ -50,7 +50,7 @@ export default async function BlogPage({
           <h1>{data.title}</h1>
           <div dangerouslySetInnerHTML={{ __html: htmlContent }}></div>
         </div>
-        <Onthispage className="text-sm w-[20%]" htmlContent={htmlContent} />
+        <Onthispage className="text-sm w-[50%]" htmlContent={htmlContent} />
       </div>
     </MaxWidthWrapper>
   );

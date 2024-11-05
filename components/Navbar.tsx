@@ -12,7 +12,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 
-const getGreeting = () =>{
+const getGreeting = () => {
   const hour = new Date().getHours();
   if (hour < 12) {
     return "Good Morning";
@@ -21,12 +21,14 @@ const getGreeting = () =>{
     return "Good Afternoon";
   }
   return "Good Evening";
-}
+};
 
 const Navbar = () => {
   return (
     <nav className="h-16 bg-background/40 sticky top-0 border-b backdrop-blur px-8 flex items-center justify-between">
-      <div className="text-lg font-bold md:text-xl">Mark</div>
+      <div className="text-lg font-bold md:text-xl">
+        <Link href={"/"}>Mark</Link>
+      </div>
       <ul className="hidden md:flex w-full justify-end space-x-4 items-center">
         <li>
           <Link href={"/"}>Home</Link>

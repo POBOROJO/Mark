@@ -9,14 +9,20 @@ interface LinkType {
   text: string;
 }
 
-const Onthispage = ({ htmlContent, className }: { htmlContent: string, className: string }) => {
+const Onthispage = ({
+  htmlContent,
+  className,
+}: {
+  htmlContent: string;
+  className: string;
+}) => {
   const [links, setlinks] = useState<null | LinkType[]>(null);
 
   useEffect(() => {
     const temp = document.createElement("div");
     temp.innerHTML = htmlContent;
 
-    const headings = temp.querySelectorAll("h2, h3");
+    const headings = temp.querySelectorAll("h2");
 
     const generatedLinks: LinkType[] = [];
 
@@ -37,11 +43,14 @@ const Onthispage = ({ htmlContent, className }: { htmlContent: string, className
     <div className={cn("hidden md:block", className)}>
       <div className="sticky top-20">
         <h2>On this page</h2>
-        <ul className="not-prose">
+        <ul className="not-prose text-xs">
           {links &&
             links.map((link) => (
               <li key={link.id} className="pt-1">
-                <a className="hover:underline" href={`#${link.id}`}>{link.text}</a>
+                <a className="hover:underline" href={`#${link.id}`}>
+                  {link.text.slice(0, 50)}
+                  {link.text.length > 50 ? "..." : ""}
+                </a>
               </li>
             ))}
         </ul>
