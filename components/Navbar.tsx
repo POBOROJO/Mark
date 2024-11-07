@@ -25,7 +25,7 @@ const getGreeting = () => {
 
 const Navbar = () => {
   return (
-    <nav className="h-16 bg-background/40 sticky top-0 border-b backdrop-blur px-8 flex items-center justify-between">
+    <nav className="h-16 bg-background/40 sticky top-0 border-b backdrop-blur px-8 flex items-center justify-between z-10">
       <div className="text-lg font-bold md:text-xl">
         <Link href={"/"}>Mark</Link>
       </div>
