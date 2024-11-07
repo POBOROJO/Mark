@@ -1,6 +1,6 @@
 ---
 title: Ultimate Python Tutorial
-slug: ultimate-python-tutorial
+slug: python-tutorial
 description: Comprehensive guide on mastering Python from basic syntax to advanced concepts.
 --- 
 Welcome to the Ultimate Python Tutorial! Whether you're a beginner or an experienced developer, this guide is designed to help you master Python. We'll cover everything from basic syntax to advanced topics, ensuring you gain a deep understanding of the language.

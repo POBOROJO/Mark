@@ -1,3 +1,9 @@
+---
+title: C++ STL
+slug: stl
+description: C++ STL quick help
+---
+
 # Coding important terms and there uses AND STL and tricks
 
 **NOTE- AGAR KABHI QUESTIONS MEIN “TLE ” LAG JAYE TAB AGAR HUM VALUES OF BY REFERENCES KARDE TOH ANSWER PASS HO JAYEGA**
@@ -22,7 +28,7 @@ priority_queue<int, vector<int>> pq;               //creates max-heap
 - writing comparator function for priority_queue
 
 ```cpp
-1. Using in-built comparator provided by C++ : 
+1. Using in-built comparator provided by C++ :
 
 priority_queue<int, vector<int>, greater<int>> pq;  //creates min-heap
 priority_queue< pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>> > pq; //min_heap of pairs
@@ -58,7 +64,7 @@ priority_queue<int, vector<int>, function<bool(int&, int&)> > pq(comp);   //usag
 
 auto comp = [](int &a, int &b) {
     return a<b; //max-heap
-    return a>b; //min-heap 
+    return a>b; //min-heap
 };
 
 priority_queue<int, vector<int>, decltype(comp) > pq(comp);   //usage
@@ -88,10 +94,10 @@ Examples :
     cout << "target = "  << target << endl;
     /*
         output :
-        source = 
+        source =
         target = "MIK"
     */
-    
+
     vector<string> v;
     string str = "example";
     v.push_back(std::move(str));
@@ -129,7 +135,7 @@ Benefit : You didn't have to write for loop to find the sum
 binary_op : Binary operation taking an element of type <initial_sum> as first argument and an
             element in the range as second, and which returns a value that can be assigned to type T.
 
-Example : 
+Example :
 
 auto myBinaryOp = [&](int s, long n) {
     return s + n*n; //sums the square of numbers
@@ -214,13 +220,13 @@ It gives the next lexicographically greater permutation.
 So, if the container is already the greatest permutation (descending order), it returns nothing.
 
 vector<int> vec{1, 2, 3, 4};
-    
+
 if(next_permutation(begin(vec), end(vec)))
     cout << "Next permutation available" << endl;
 
 for(int &x : vec)
     cout << x << " ";
-    
+
 //Output : 1, 2, 4, 3
 
 Also see : std::prev_permutation() - It gives just the previous lexicographically smaller permutation.
@@ -239,17 +245,17 @@ Usage:
 Example-1
     string s = "12345";
     stringstream ss(s);
- 
+
     // The object has the value 12345 and stream
     // it to the integer x
     int x = 0;
     ss >> x;
     cout << x;
-    
+
 Exmaple-2
     stringstream s(ss);
     string word; // to store individual words
-  
+
     int count = 0;
     while (s >> word)
         count++;
@@ -263,7 +269,7 @@ Example-3
     int real, imag;
     ss >> real >> justToSkip >> imag >> justToSkip;
     cout << real << ", " << imag; //output : 1, 1
-    
+
     Other application on this STL :
     Leetcode - 151  : Reverse Words in a String
     Leetcode - 186  : Reverse Words in a String II
@@ -275,7 +281,8 @@ Example-3
     etc.
 ```
 
-### 📝 std::transform(InputIterator first1, InputIterator last1, OutputIterator result, 
+### 📝 std::transform(InputIterator first1, InputIterator last1, OutputIterator result,
+
 ``
 
 ```cpp
@@ -285,7 +292,7 @@ Uage :
 1) Convert all letters of a string to lower case
 2) Convert all letters of a string to upper case
 
-Example : 
+Example :
     string line = "Hello world, this is MIK";
 
     transform(begin(line), end(line), begin(line), ::tolower);
@@ -302,17 +309,17 @@ Example :
 ```cpp
 It converts a regular expression given by user to desired expression given by user.
 
-Example : 
+Example :
     Ex-1 - Remove all vowels from a string.
     string s = "mika";
     auto rgx = regex("[aeiouAEIOU]");
     cout << regex_replace(s, rgx, "");
-    
+
     Ex-2 - Replace all '.' to "[.]"
     string s = "1.2.3.4";
     auto rgx = regex("\\.");
     regex_replace(s, rgx, "[.]");
-    
+
     Note : You can write smart regex for achieving amazing replacements.
     Qns on Leetcode:
     Leetcode - 1108 : Defanging an IP Address
@@ -325,7 +332,7 @@ Example :
 ```cpp
 counts the number of elements satisfying a given condition (given by comparator function or lambda)
 
-Example : 
+Example :
     vector<int> vec{1, 3, 2, 0, 5, 0};
 
     auto lambda = [&](const auto& i) {
@@ -333,7 +340,7 @@ Example :
     };
 
     cout << count_if(begin(vec), end(vec), lambda); //output : 2
-    
+
     Note : You can write any kind of lambda/comparator functions for matching your required condition
     Qns on Leetcode:
     Leetcode - 1773 : Count Items Matching a Rule
@@ -344,19 +351,19 @@ Example :
 
 ```cpp
 Copies the elements to a container
-how copy_if function works : in this function you have to pass four parameters 
+how copy_if function works : in this function you have to pass four parameters
 copy_if(begin iterator , end iterator , destination , condition)
-			
+
     eg :    vector<int> from_vec = {1,2,3,4,5,6,7,8,9,10};
             vector<int> to_vec;
             //here i want to copy all the number from from_vec vector to to_vec vector which are divisible by 2 .
-            
+
             copy_if(from_vec.begin(), from_vec.end(), back_inserter(to_vec),[](int n){return n%2==0;});
-            
-            for(auto it : to_vec) 
+
+            for(auto it : to_vec)
                 cout<<it<<" ";
             o/p : 2 4 6 8 10
-Example : 
+Example :
     Note : You can write any kind of lambda/comparator functions for matching your required condition
     Qns on Leetcode:
     Leetcode - 1796 : Second Largest Digit in a String
@@ -366,16 +373,16 @@ Example :
 ### 📝 Writing lambda for upper_bound or lower_bound for vector<pair<int, string>> 🔢
 
 ```cpp
-Example : 
+Example :
         //Let's say you want upper_bound for a variable timestamp, take it in a pair (because it's a vector of pair)
         pair<int, string> ref = make_pair(timestamp, "");
-            
+
         auto lambda = [](const pair<int, string>& p1, const pair<int, string>& p2) {
             return p1.first < p2.first;
         };
-        
+
         auto it = upper_bound(begin(my_vector), end(my_vector), ref, lambda);
-	
+
 	Qns on Leetcode:
     	Leetcode - 981 : Time Based Key-Value Store
 ```
@@ -383,7 +390,7 @@ Example :
 ### 📝 Writing lambda for unordered_map to make life simple 🔢
 
 ```cpp
-Example : 
+Example :
         //Let's say, you want to store different evaluate logic for different operator "+", "-", "*", "/"
 	unordered_map<string, function<int (int, int) > > mp = {
             { "+" , [] (int a, int b) { return a + b; } },
@@ -391,27 +398,25 @@ Example :
             { "*" , [] (int a, int b) { return a * b; } },
             { "/" , [] (int a, int b) { return a / b; } }
         };
-	
+
 	//Simply use it like below :-
 	int result = mp["+"](1, 2); //This will return 1+2 i.e. 3
-	
+
 	Qns on Leetcode: 150
 	Leetcode - : Evaluate Reverse Polish Notation
 ```
 
 ### 📝 std::set_difference and std::back_inserter 🔢
 
- 
-
 ```cpp
 set_difference -> Copies the elements from the sorted s1 which are not found in the sorted s2 to a container in sorted order
 back_inserter -> Can be used to add elements to the end of a container
-Example : 
+Example :
         set<int> st1, st2;
 	vector<int> v1;
 	//Find difference in between set1 and set2 and put unique element of set1 in v1
 	set_difference(begin(st1), end(st1), begin(st2), end(st2), back_inserter(v1));
-	
+
 	Qns on Leetcode: 2215
 	Leetcode - : Find the Difference of Two Arrays
 ```
@@ -472,7 +477,7 @@ int main()
 }
 ```
 
-**Tips: 
+**Tips:
 • Any number which is divisible by 9 has the sum of digits adding up to 9 always.
 • Therefore, the digital root for any number divisible by 9 is always 9.
 • The digital root (ans) for 0 is always 0.
@@ -484,23 +489,23 @@ int main()
 
 **VECTORS-**
 
-`vector<int>a(5,0)`  → [0,0,0,0,0]
+`vector<int>a(5,0)` → [0,0,0,0,0]
 
-`a.capacity()` → kitna element ke liye space para huwa hain 
+`a.capacity()` → kitna element ke liye space para huwa hain
 
 `a.front()` → returns the 1st element,
 
-`a.back()` → returns the last element. 
+`a.back()` → returns the last element.
 
-`v1.insert(v1.end(),v2.begin(),v2.end());`  → inserting one vectors value to other
+`v1.insert(v1.end(),v2.begin(),v2.end());` → inserting one vectors value to other
 
-**v1.insert ( position kaha se gusega values  , v2 vector ke begin se , v2 vector ke end tak )**
+**v1.insert ( position kaha se gusega values , v2 vector ke begin se , v2 vector ke end tak )**
 
 `v.clear()` → clears a vector pura khali kar deta hain
 
 `vector::erase()`
 
-*erase()* function is used to remove elements from a container from the specified position or range.
+_erase()_ function is used to remove elements from a container from the specified position or range.
 
 **Syntax:**
 
@@ -527,7 +532,7 @@ push_back() function is used to push elements into a vector from the back. The n
 
 - `int lenTwo=exampleVariableOne[0].length;`
 
-→ **returns the length of the columns in the    array**
+→ **returns the length of the columns in the array**
 
 → Adjust the `0` to another number to change the row specified.
 
@@ -543,14 +548,14 @@ This method is used to insert elements in a vector from the end of the container
 
 This method is used instead of [**creating the object**](https://www.geeksforgeeks.org/make-class-whose-objects-can-dynamically-allocated/) using [**parameterized constructor**](https://www.geeksforgeeks.org/how-to-initialize-array-of-objects-with-parameterized-constructors-in-c/) and allocating it into a different memory, then passing it to the [**copy constructor**](https://www.geeksforgeeks.org/copy-constructor-in-cpp/), which will [**insert it into the vector**](https://www.geeksforgeeks.org/vector-insert-function-in-c-stl/). **This function can directly [insert the object without calling the copy constructor](https://www.geeksforgeeks.org/preventing-object-copy-in-cpp-3-different-ways/).**
 
-|  | **Push_back** | **emplace_back** |
-| --- | --- | --- |
-| **1.** | It is used to insert the element in a vector or a string | It is used to insert an element in a vector or a string. |
-| **2.** | It is slower. | It is faster. |
-| **3.** | Its syntax is :
-**push_back(value_to_insert)** | Its syntax is -:
-**emplace_back(value_to_insert)** |
-| **4.** | push_back accepts the only object of the type if the constructor accept more than one arguments | emplace_back accept arguments of the constructor of the type. |
+|                                   | **Push_back**                                                                                   | **emplace_back**                                              |
+| --------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------- |
+| **1.**                            | It is used to insert the element in a vector or a string                                        | It is used to insert an element in a vector or a string.      |
+| **2.**                            | It is slower.                                                                                   | It is faster.                                                 |
+| **3.**                            | Its syntax is :                                                                                 |
+| **push_back(value_to_insert)**    | Its syntax is -:                                                                                |
+| **emplace_back(value_to_insert)** |
+| **4.**                            | push_back accepts the only object of the type if the constructor accept more than one arguments | emplace_back accept arguments of the constructor of the type. |
 
 ## Max element in an array or vector-
 
@@ -580,7 +585,7 @@ cout<<p.first<<" "<<p.second.first<<" "<<p.second.second; // -> 1 2 3
 
 `deque<int>d;`
 
-`d.push_back();` 
+`d.push_back();`
 
 `d.push_front ();`
 
@@ -592,11 +597,11 @@ cout<<p.first<<" "<<p.second.first<<" "<<p.second.second; // -> 1 2 3
 
 `d.back();`
 
-`d.erase(d,begin(),d.begin+1);` 
+`d.erase(d,begin(),d.begin+1);`
 
-  OR USE THIS → 
+OR USE THIS →
 
-**agar koi specific element delete karna ho toh** `P.erase(P.begin()+j);`  
+**agar koi specific element delete karna ho toh** `P.erase(P.begin()+j);`
 
 j → position of the element to delete ( this or one is only working for leetcode )
 
@@ -613,19 +618,19 @@ j → position of the element to delete ( this or one is only working for leetco
 
 `list<int>l;`
 
-`l.push_back();` 
+`l.push_back();`
 
 `l.push_front ();`
 
 `l.pop_front();`
 
-`l.pop_back();` 
+`l.pop_back();`
 
 ## Stack-(lifo)
 
 `Stack<int>s;`
 
-`s.push();` 
+`s.push();`
 
 `s.pop();`
 
@@ -637,7 +642,7 @@ j → position of the element to delete ( this or one is only working for leetco
 
 `queue<int>s;`
 
-`s.push();` 
+`s.push();`
 
 `s.pop();`
 
@@ -651,7 +656,7 @@ j → position of the element to delete ( this or one is only working for leetco
 
 `priority_queue<int> maxi;` → max heap (by default )
 
- `priority_queue<int,vetor<int>, greater<int> > mini;` → min heap
+`priority_queue<int,vetor<int>, greater<int> > mini;` → min heap
 
 `maxi.push();`
 
@@ -664,7 +669,7 @@ j → position of the element to delete ( this or one is only working for leetco
 - also known as ordered_set
 - stores unique elements
 - implementation based on BST
-- elements after inserting (O(n))  can’t be modified
+- elements after inserting (O(n)) can’t be modified
 - elements are returned in sorted order.
 
 ### unordered set-
@@ -700,10 +705,10 @@ j → position of the element to delete ( this or one is only working for leetco
 `}cout<<endl;`
 
 | `s.insert();` | `s.find();` | `s.erase();` | `s.count()`; | **O(logn)** |
-| --- | --- | --- | --- | --- |
+| ------------- | ----------- | ------------ | ------------ | ----------- |
 
 | `s.size();` | `s.begin();` | `s.end();` | `s.empty();` | **O(1)** |
-| --- | --- | --- | --- | --- |
+| ----------- | ------------ | ---------- | ------------ | -------- |
 
 ## Maps-
 
@@ -713,16 +718,16 @@ j → position of the element to delete ( this or one is only working for leetco
 - and 1 key points towards 1 value.
 - 2 keys might point to same value but 1 key points to 2 values not possible.
 
-### **!!!!!** **NOTE  !!!!!-**
+### **!!!!!** **NOTE !!!!!-**
 
-- **`mp.find(nums[i]+1)==mp.end()`**  → **this means that agra tumko desired element mil gaya MAP mein**
+- **`mp.find(nums[i]+1)==mp.end()`** → **this means that agra tumko desired element mil gaya MAP mein**
 - **`map.find(nums[i]+1) != map.end()` → this means that agra tumko desired element nahi mila MAP mein**
 
 - **Unordered map**
 
 ```cpp
 int main(){
-map<int,string>m;              
+map<int,string>m;
 
 m[1]=”bhatt”;
 
@@ -731,12 +736,12 @@ m[2]=”parijat”;
 m[13]=”kumar”;
 m.insert(5,"poborojo");
 for( auto:m){
-cout<<i.first<<" "<<i.second<<" "; /*op- 1 bhatt 
-																				 2 parijat 
+cout<<i.first<<" "<<i.second<<" "; /*op- 1 bhatt
+																				 2 parijat
                                         13 kumar */
 }
-                                /*   op- 1 bhatt 
-																				 2 parijat 
+                                /*   op- 1 bhatt
+																				 2 parijat
                                          5 poborojo
                                         13 kumar */
 
@@ -750,26 +755,27 @@ for(int i=0;i<nums.size();i++){
 
 return 1 if true
 
-0 if not 
+0 if not
 
 `s.erase(13);`
 
 ```cpp
 for(auto:m){
 cout<<i.first<<" "<<i.second<<" ";
-/*                                  op-  1 bhatt 
-																				 2 parijat 
+/*                                  op-  1 bhatt
+																				 2 parijat
                                          5 poborojo
 */
 ```
 
 | `m.insert()` | `m.erase()` | `m.find()` | `m.count();` | **O(logn)** |
-| --- | --- | --- | --- | --- |
+| ------------ | ----------- | ---------- | ------------ | ----------- |
+
 - `unordered_map<int,string>mp;` → implemnetation from hash table
 - T.C-**O(1)**
 
 ```cpp
-// To find the duplicates in an array 
+// To find the duplicates in an array
 T.C= O(n) S.C=O(n)
 
 vector<int> findDuplicates(vector<int>& nums) {
@@ -804,16 +810,16 @@ Approach:
 
 1. First made an unordered map and then map mein values dala
 2. sort kiya with a lamda function
-    
-    ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d74c3414-3393-4d9d-9a34-b7a0659f0687/Untitled.png)
-    
+
+   ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d74c3414-3393-4d9d-9a34-b7a0659f0687/Untitled.png)
+
 3. then `return mp[a]!=mp[b] ? mp[a] < mp[b] : a>b ;` agar a aur b ka freq different aata hai then return the freq with the smaller one and if same freq aagaya i.e `mp[a]!=mp[b]` → condition is false then we return the one which is greater value ( e.g 3 → 2 times and 2 → 2 times both have same freq then we return 3 first then 2 )
 
 ## Algorithms-
 
 `#include<algorithm>`
 
-`binary_search(v.begin(),v.end(),n);`  → n is the number to find.
+`binary_search(v.begin(),v.end(),n);` → n is the number to find.
 
 `lower_bound()` → return an iterator pointing to the first element.
 
@@ -822,26 +828,26 @@ Approach:
 ```cpp
 #include <bits/stdc++.h>
 using namespce std;
-  
+
 // Driver code
 int main()
 {
     // Input vector
     vector<int> v{ 10, 20, 30, 30, 30, 40, 50 };
-  
+
     // Print vector
     cout << "Vector contains :";
     for (unsigned int i = 0; i < v.size(); i++)
        cout << " " << v[i];
     cout << "\n";
-  
+
     vector<int>::iterator low1, low2, low3;
-      
+
     // lower_bound
     low1 = lower_bound(v.begin(), v.end(), 30);
     low2 = lower_bound(v.begin(), v.end(), 35);
     low3 = lower_bound(v.begin(), v.end(), 55);
-  
+
     // Printing the lower bounds
     cout
         << "\nlower_bound for element 30 at position : "
@@ -852,7 +858,7 @@ int main()
     cout
         << "\nlower_bound for element 55 at position : "
         << (low3 - v.begin());
-  
+
     return 0;
 }
 
@@ -872,7 +878,7 @@ using namespace std;
 int main()
 {
     set<int> s;
- 
+
     // Function to insert elements
     // in the set container
     s.insert(1);
@@ -880,27 +886,27 @@ int main()
     s.insert(2);
     s.insert(5);
     s.insert(6);
- 
+
     cout << "The set elements are: ";
     for (auto it = s.begin(); it != s.end(); it++)
         cout << *it << " ";
- 
+
     // when 2 is present
     // points to next element after 2
     auto it = s.upper_bound(2);
     cout << "\nThe upper bound of key 2 is ";
     cout << (*it) << endl;
- 
+
     // when 3 is not present
     // points to next greater after 3
     it = s.upper_bound(3);
     cout << "The upper bound of key 3 is ";
     cout << (*it) << endl;
- 
+
     return 0;
 }
 //o/p-
-The set elements are: 1 2 4 5 6 
+The set elements are: 1 2 4 5 6
 The upper bound of key 2 is 4
 The upper bound of key 3 is 4
 ```
@@ -913,47 +919,45 @@ o/p- dcba
 
 ### Sort-
 
-`sort(s.begin(),s.end());`  → **intro sort(n log n)** i.e 3 alog based sort (quick sort, insertion sort, heap sort).
+`sort(s.begin(),s.end());` → **intro sort(n log n)** i.e 3 alog based sort (quick sort, insertion sort, heap sort).
 
 ## Bit manipulation-
 
 Basics-
 
 - **Get ith bit:**
-Mask: Right shift n ‘i’ times, and check the first bit.
+  Mask: Right shift n ‘i’ times, and check the first bit.
 
 ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/233cf862-3918-4630-ab48-92971d968736/Untitled.png)
 
 - **Set ith bit:**
-Mask: 1 << i
-Bitwise OR operation between n and mask sets the i
-th bit to one.
+  Mask: 1 << i
+  Bitwise OR operation between n and mask sets the i
+  th bit to one.
 
 ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e83e9b16-0617-4041-bcda-1073e13cd2a4/Untitled.png)
 
 - **Clear ith bit**
-Mask: ~ (1 << i )
-In the mask, all the bits would be one, except the i   
-th bit. Taking bitwise AND with n
-would clear the i
-th bit.
+  Mask: ~ (1 << i )
+  In the mask, all the bits would be one, except the i  
+  th bit. Taking bitwise AND with n
+  would clear the i
+  th bit.
 
 ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/eb6cadea-113e-4ec5-9e06-bddad6da580d/Untitled.png)
 
 - **Update i’th bit to the given value**
-Mask: mask has all the bits set to one except i
-th bit.
-n = n & mask, i
-th bit is cleared.
-Now, to set i
-th bit to value, we take value << pos as the mask.
+  Mask: mask has all the bits set to one except i
+  th bit.
+  n = n & mask, i
+  th bit is cleared.
+  Now, to set i
+  th bit to value, we take value << pos as the mask.
 
 ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/e108720f-a23f-4ce2-9f11-77aae6a1eac1/Untitled.png)
 
 - **Toggle bit**
-    
-    Toggling a bit means that if K-th bit is 1, then change it to 0 and if it is 0 then change it to 1
-    
+  Toggling a bit means that if K-th bit is 1, then change it to 0 and if it is 0 then change it to 1
 
 ```cpp
 int getBit(int n, int pos)
@@ -974,8 +978,8 @@ int clearBit(int n, int pos)
 int updateBit(int n, int pos, int value)
 {
     int store = ~(1 << pos);
-    n = n & store;              
-    return (n | (value << pos)); 
+    n = n & store;
+    return (n | (value << pos));
 }
 int toggleBit(int n, int pos)
 {
@@ -1003,18 +1007,18 @@ int main()
  int main()
 {
     string s;
-    
+
       cin>>s;
-      
+
       map<char , int >m;
-      
+
          map<char , int >::iterator itr;
-       
+
       for(long i=0;i<s.length();i++)
         m[s[i]]++;
-        
+
         for(itr=m.begin();itr!=m.end();itr++)
-          
+
             cout<<itr->first<<" - "<<itr->second<<endl;
 }
 ```
@@ -1023,7 +1027,7 @@ int main()
 
 ### To push a pair into a vector
 
-e.g 
+e.g
 
 ![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9f59090f-66b4-4645-889c-7a0f852d9c39/Untitled.png)
 

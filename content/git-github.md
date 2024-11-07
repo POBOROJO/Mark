@@ -1,6 +1,6 @@
 ---
 title: Git and GitHub Tutorial
-slug: git-github-tutorial
+slug: git-github
 description: Learn Git version control and GitHub collaboration.
 ---
 
