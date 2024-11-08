@@ -1,8 +1,12 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button, buttonVariants } from "./ui/button";
 import { ModeToggle } from "./theme-toggle";
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import LoadingBar from "react-top-loading-bar";
+import { usePathname } from "next/navigation";
 import {
   Sheet,
   SheetContent,
@@ -24,9 +28,35 @@ const getGreeting = () => {
 };
 
 const Navbar = () => {
+  const [progress, setProgress] = useState(0)
+  const pathname = usePathname();
+ 
+  useEffect(()=>{
+    setProgress(30);
+
+    setTimeout(()=>{
+      setProgress(70);
+    },100);
+
+    setTimeout(()=>{
+      setProgress(100);
+    },800);
+  },[pathname])
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      setProgress(0);
+    },900);
+  },[])
+
   return (
     <nav className="h-16 bg-background/40 sticky top-0 border-b backdrop-blur px-8 flex items-center justify-between z-10">
       <div className="text-lg font-bold md:text-xl">
+        <LoadingBar
+          color="#6028FF"
+          progress={progress}
+          onLoaderFinished={() => setProgress(0)}
+        />
         <Link href={"/"}>Mark</Link>
       </div>
       <ul className="hidden md:flex w-full justify-end space-x-4 items-center">
